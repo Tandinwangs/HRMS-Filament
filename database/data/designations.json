@@ -1,0 +1,442 @@
+[
+    {
+        "id": "bac719fc-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Access Network Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71a71-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Accountant",
+        "status": 1
+    },
+    {
+        "id": "bac71a7f-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Accounts Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71a8a-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Administrative Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71ac9-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Application Developer",
+        "status": 1
+    },
+    {
+        "id": "bac71ace-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Asset Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71ad2-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Assistant Revenue Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71ada-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Bill Collector",
+        "status": 1
+    },
+    {
+        "id": "bac71ade-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Billing Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71ae3-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Contact Center Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71ae7-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Contact Center Executive",
+        "status": 1
+    },
+    {
+        "id": "bac71aeb-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Core Network Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71aef-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Customer Care Executive",
+        "status": 1
+    },
+    {
+        "id": "bac71b05-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Driver",
+        "status": 1
+    },
+    {
+        "id": "bac71b08-3cb9-11ee-9505-2e49f331fe41",
+        "name": "ERP Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71b0c-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Executive Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71b11-3cb9-11ee-9505-2e49f331fe41",
+        "name": "General Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71b16-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Graphic Designer",
+        "status": 1
+    },
+    {
+        "id": "bac71b1a-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Human  Resource Management Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b1f-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Human Resource Development Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b23-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Human Resource Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b28-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Internal Auditor",
+        "status": 1
+    },
+    {
+        "id": "bac71b3b-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Inventory Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b40-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71b44-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Marketing Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b48-3cb9-11ee-9505-2e49f331fe41",
+        "name": "MFS Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71b4d-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Optimization Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71b51-3cb9-11ee-9505-2e49f331fe41",
+        "name": "PR and Administrative Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b55-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Procurement Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b58-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Project  Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71b5c-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Project Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71b6f-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Regional  Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71b72-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Regional Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71b76-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Revenue Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71b79-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Roaming Coordinator",
+        "status": 1
+    },
+    {
+        "id": "bac71b7d-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Customer Care Executive (Samsung)",
+        "status": 1
+    },
+    {
+        "id": "bac71b81-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Accountant",
+        "status": 1
+    },
+    {
+        "id": "bac71b84-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Customer Care Executive",
+        "status": 1
+    },
+    {
+        "id": "bac71b88-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Driver",
+        "status": 1
+    },
+    {
+        "id": "bac71b8b-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Personal Assistant",
+        "status": 1
+    },
+    {
+        "id": "bac71b9f-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Roaming Coordinator",
+        "status": 1
+    },
+    {
+        "id": "bac71ba3-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Technical Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71ba7-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Technician",
+        "status": 1
+    },
+    {
+        "id": "bac71baa-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Store Assistant",
+        "status": 1
+    },
+    {
+        "id": "bac71bae-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Strategy Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71bb1-3cb9-11ee-9505-2e49f331fe41",
+        "name": "System Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71bb4-3cb9-11ee-9505-2e49f331fe41",
+        "name": "TDA Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71bb8-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technical  Superviser",
+        "status": 1
+    },
+    {
+        "id": "bac71bbb-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technical Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71bce-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technical Superviser",
+        "status": 1
+    },
+    {
+        "id": "bac71bd2-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technical Supervisor",
+        "status": 1
+    },
+    {
+        "id": "bac71bd5-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technician",
+        "status": 1
+    },
+    {
+        "id": "bac71bd9-3cb9-11ee-9505-2e49f331fe41",
+        "name": "VAS Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71bdc-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Webmaster",
+        "status": 1
+    },
+    {
+        "id": "bac71be0-3cb9-11ee-9505-2e49f331fe41",
+        "name": "MD",
+        "status": 1
+    },
+    {
+        "id": "bac71be3-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Power Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71be7-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Assistant Inventory Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71bea-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Assistant Audit Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71bfe-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technology Analyst, Strategy Planning",
+        "status": 1
+    },
+    {
+        "id": "bac71c02-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Audit Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71c06-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Business Analyst, Business Development",
+        "status": 1
+    },
+    {
+        "id": "bac71c0a-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Business Operation Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71c0d-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Digital Marketing Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71c11-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Assistant Graphic Designer",
+        "status": 1
+    },
+    {
+        "id": "bac71c14-3cb9-11ee-9505-2e49f331fe41",
+        "name": "O&M Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71c18-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Engineer, Mobile Core",
+        "status": 1
+    },
+    {
+        "id": "bac71c1b-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Engineer, RAN",
+        "status": 1
+    },
+    {
+        "id": "bac71c49-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Software Developer",
+        "status": 1
+    },
+    {
+        "id": "bac71c4d-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Head",
+        "status": 1
+    },
+    {
+        "id": "bac71c50-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Software Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71c54-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Deputy General Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71c57-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Administrative Assistant",
+        "status": 1
+    },
+    {
+        "id": "bac71c5a-3cb9-11ee-9505-2e49f331fe41",
+        "name": "IP Access Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71c5e-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior Regional Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71c61-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Business Support Analyst",
+        "status": 1
+    },
+    {
+        "id": "bac71c65-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Assistant Accounts Officer",
+        "status": 1
+    },
+    {
+        "id": "bac71c78-3cb9-11ee-9505-2e49f331fe41",
+        "name": "ISP Network Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71c7b-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Analyst",
+        "status": 1
+    },
+    {
+        "id": "bac71c7f-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Senior General Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71c82-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Engineer, IP Network",
+        "status": 1
+    },
+    {
+        "id": "bac71c86-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Officiating Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71ca7-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Acting Manager",
+        "status": 1
+    },
+    {
+        "id": "bac71cae-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Technology Analyst,Strategic Planning",
+        "status": 1
+    },
+    {
+        "id": "bac71cb2-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Engineer,ISP Network",
+        "status": 1
+    },
+    {
+        "id": "bac71cb6-3cb9-11ee-9505-2e49f331fe41",
+        "name": "System Engineer, ISP",
+        "status": 1
+    },
+    {
+        "id": "bac71ce6-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Engineer, Network Infra Projects",
+        "status": 1
+    },
+    {
+        "id": "bac71ceb-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Civil Engineer",
+        "status": 1
+    },
+    {
+        "id": "bac71cf0-3cb9-11ee-9505-2e49f331fe41",
+        "name": "Personal Assistant",
+        "status": 1
+    }
+]

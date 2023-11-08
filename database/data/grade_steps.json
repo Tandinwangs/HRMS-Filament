@@ -1,0 +1,432 @@
+[
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 1",
+        "status": 1,
+        "starting_salary": 32327,
+        "increment": 808,
+        "ending_salary": 40409,
+        "pay_scale": "32327 - 808 - 40409",
+        "created_at": "2019-03-08 12:45:09"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 2",
+        "status": 1,
+        "starting_salary": 29389,
+        "increment": 735,
+        "ending_salary": 36736,
+        "pay_scale": "29389 - 735 - 36736",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 3",
+        "status": 1,
+        "starting_salary": 26717,
+        "increment": 668,
+        "ending_salary": 33396,
+        "pay_scale": "26717 - 668 - 33396",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 4",
+        "status": 1,
+        "starting_salary": 24288,
+        "increment": 607,
+        "ending_salary": 30360,
+        "pay_scale": "24288 - 607 - 30360",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 5",
+        "status": 1,
+        "starting_salary": 22080,
+        "increment": 552,
+        "ending_salary": 27600,
+        "pay_scale": "22080 - 552 - 27600",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 6",
+        "status": 1,
+        "starting_salary": 20073,
+        "increment": 502,
+        "ending_salary": 25091,
+        "pay_scale": "20073 - 502 - 25091",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 7",
+        "status": 1,
+        "starting_salary": 18248,
+        "increment": 456,
+        "ending_salary": 22810,
+        "pay_scale": "18248 - 456 - 22810",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 8",
+        "status": 1,
+        "starting_salary": 16589,
+        "increment": 415,
+        "ending_salary": 20736,
+        "pay_scale": "16589 - 415 - 20736",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "e94d5df0-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T2 Step 9",
+        "status": 1,
+        "starting_salary": 15081,
+        "increment": 377,
+        "ending_salary": 18851,
+        "pay_scale": "15081 - 377 - 18851",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 1",
+        "status": 1,
+        "starting_salary": 51863,
+        "increment": 1297,
+        "ending_salary": 64829,
+        "pay_scale": "51863 - 1297 - 64829",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 2",
+        "status": 1,
+        "starting_salary": 46724,
+        "increment": 1168,
+        "ending_salary": 58405,
+        "pay_scale": "46724 - 1168 - 58405",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 3",
+        "status": 1,
+        "starting_salary": 42094,
+        "increment": 1052,
+        "ending_salary": 52617,
+        "pay_scale": "42094 - 1052 - 52617",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 4",
+        "status": 1,
+        "starting_salary": 37922,
+        "increment": 948,
+        "ending_salary": 47403,
+        "pay_scale": "37922 - 948 - 47403",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 5",
+        "status": 1,
+        "starting_salary": 34164,
+        "increment": 854,
+        "ending_salary": 42705,
+        "pay_scale": "34164 - 854 - 42705",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 6",
+        "status": 1,
+        "starting_salary": 30778,
+        "increment": 769,
+        "ending_salary": 38473,
+        "pay_scale": "30778 - 769 - 38473",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 7",
+        "status": 1,
+        "starting_salary": 27728,
+        "increment": 693,
+        "ending_salary": 34660,
+        "pay_scale": "27728 - 693 - 34660",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 8",
+        "status": 1,
+        "starting_salary": 24980,
+        "increment": 625,
+        "ending_salary": 31226,
+        "pay_scale": "24980 - 625 - 31226",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 9",
+        "status": 1,
+        "starting_salary": 22505,
+        "increment": 563,
+        "ending_salary": 28131,
+        "pay_scale": "22505 - 563 - 28131",
+        "created_at": "2019-03-08 12:45:10"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 10",
+        "status": 1,
+        "starting_salary": 20275,
+        "increment": 507,
+        "ending_salary": 25343,
+        "pay_scale": "20275 - 507 - 25343",
+        "created_at": "2019-03-08 12:45:11"
+    },
+    {
+        "grade_id": "a45fd040-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "T1 Step 11",
+        "status": 1,
+        "starting_salary": 18266,
+        "increment": 457,
+        "ending_salary": 22832,
+        "pay_scale": "18266 - 457 - 22832",
+        "created_at": "2019-03-08 12:45:11"
+    },
+    {
+        "grade_id": "964aac43-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "E0 Step 1",
+        "status": 1,
+        "starting_salary": null,
+        "increment": null,
+        "ending_salary": null,
+        "pay_scale": null,
+        "created_at": "2019-03-08 12:45:12"
+    },
+    {
+        "grade_id": "964aac43-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "E0 Step 2",
+        "status": 1,
+        "starting_salary": null,
+        "increment": null,
+        "ending_salary": null,
+        "pay_scale": null,
+        "created_at": "2019-03-08 12:45:12"
+    },
+    {
+        "grade_id": "964aac43-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "E0 Step 3",
+        "status": 1,
+        "starting_salary": null,
+        "increment": null,
+        "ending_salary": null,
+        "pay_scale": null,
+        "created_at": "2019-03-08 12:45:12"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 1",
+        "status": 1,
+        "starting_salary": 15979,
+        "increment": 399,
+        "ending_salary": 19973,
+        "pay_scale": "15979 - 399 - 19973",
+        "created_at": "2019-04-11 10:58:52"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 2",
+        "status": 1,
+        "starting_salary": 14523,
+        "increment": 363,
+        "ending_salary": 18154,
+        "pay_scale": "14523 - 363 - 18154",
+        "created_at": "2019-04-11 10:58:52"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 3",
+        "status": 1,
+        "starting_salary": 13202,
+        "increment": 330,
+        "ending_salary": 16502,
+        "pay_scale": "13202 - 330 - 16502",
+        "created_at": "2019-04-11 10:59:28"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 4",
+        "status": 1,
+        "starting_salary": 12007,
+        "increment": 300,
+        "ending_salary": 15009,
+        "pay_scale": "12007 - 300 - 15009",
+        "created_at": "2019-04-11 10:59:28"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 5",
+        "status": 1,
+        "starting_salary": 11460,
+        "increment": 287,
+        "ending_salary": 14325,
+        "pay_scale": "11460 - 287 - 14325",
+        "created_at": "2019-04-11 10:59:49"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 6",
+        "status": 1,
+        "starting_salary": 10920,
+        "increment": 273,
+        "ending_salary": 13650,
+        "pay_scale": "10920 - 273 - 13650",
+        "created_at": "2019-04-11 10:59:49"
+    },
+    {
+        "grade_id": "f341ae96-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "S Step 7",
+        "status": 1,
+        "starting_salary": 10375,
+        "increment": 259,
+        "ending_salary": 12968,
+        "pay_scale": "10375 - 259 - 12968",
+        "created_at": "2019-04-11 11:00:03"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 1",
+        "status": 1,
+        "starting_salary": 109828,
+        "increment": 2746,
+        "ending_salary": 137284,
+        "pay_scale": "109828 - 2746 - 137284",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 2",
+        "status": 1,
+        "starting_salary": 98060,
+        "increment": 2452,
+        "ending_salary": 122575,
+        "pay_scale": "98060 - 2452 - 122575",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 3",
+        "status": 1,
+        "starting_salary": 87554,
+        "increment": 2189,
+        "ending_salary": 109442,
+        "pay_scale": "87554 - 2189 - 109442",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 4",
+        "status": 1,
+        "starting_salary": 78173,
+        "increment": 1954,
+        "ending_salary": 97716,
+        "pay_scale": "78173 - 1954 - 97716",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 5",
+        "status": 1,
+        "starting_salary": 69797,
+        "increment": 1745,
+        "ending_salary": 87247,
+        "pay_scale": "69797 - 1745 - 87247",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 6",
+        "status": 1,
+        "starting_salary": 62319,
+        "increment": 1558,
+        "ending_salary": 77899,
+        "pay_scale": "62319 - 1558 - 77899",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 7",
+        "status": 1,
+        "starting_salary": 55642,
+        "increment": 1391,
+        "ending_salary": 69553,
+        "pay_scale": "55642 - 1391 - 69553",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 8",
+        "status": 1,
+        "starting_salary": 49680,
+        "increment": 1242,
+        "ending_salary": 62101,
+        "pay_scale": "49680 - 1242 - 62101",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 9",
+        "status": 1,
+        "starting_salary": 44358,
+        "increment": 1109,
+        "ending_salary": 55447,
+        "pay_scale": "44358 - 1109 - 55447",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 10",
+        "status": 1,
+        "starting_salary": 39605,
+        "increment": 990,
+        "ending_salary": 49506,
+        "pay_scale": "39605 - 990 - 49506",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 11",
+        "status": 1,
+        "starting_salary": 35362,
+        "increment": 884,
+        "ending_salary": 44202,
+        "pay_scale": "35362 - 884 - 44202",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 12",
+        "status": 1,
+        "starting_salary": 31573,
+        "increment": 789,
+        "ending_salary": 39466,
+        "pay_scale": "31573 - 789 - 39466",
+        "created_at": "2022-06-08 10:08:52"
+    },
+    {
+        "grade_id": "fa4e1311-3756-11ee-a4b3-40a6b7ad22dc",
+        "name": "P Step 13",
+        "status": 1,
+        "starting_salary": 28190,
+        "increment": 705,
+        "ending_salary": 35238,
+        "pay_scale": "28190 - 705 - 35328",
+        "created_at": "2022-06-08 10:08:52"
+    }
+]
