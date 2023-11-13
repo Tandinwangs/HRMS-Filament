@@ -23,6 +23,8 @@ class MasEmployeeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Employee-Master';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -34,6 +36,9 @@ class MasEmployeeResource extends Resource
                     ->maxLength(100),
                 Forms\Components\TextInput::make('last_name')
                     ->maxLength(100),
+                Forms\Components\TextInput::make('emp_id')
+                ->required()
+                ->maxLength(50)->label("Emp Id"),
                 Forms\Components\TextInput::make('email')
                 ->required()
                 ->maxLength(100),
@@ -111,9 +116,9 @@ class MasEmployeeResource extends Resource
                 Tables\Columns\TextColumn::make('department.name'),
                 Tables\Columns\TextColumn::make('section.name'),
                 Tables\Columns\TextColumn::make('region.name'),
-                Tables\Columns\TextColumn::make('first_name'),
-                Tables\Columns\TextColumn::make('middle_name'),
-                Tables\Columns\TextColumn::make('last_name'),
+                // Tables\Columns\TextColumn::make('first_name'),
+                // Tables\Columns\TextColumn::make('middle_name'),
+                // Tables\Columns\TextColumn::make('last_name'),
                 Tables\Columns\TextColumn::make('date_of_appointment')
                     ->date(),
                 Tables\Columns\TextColumn::make('employee_display'),

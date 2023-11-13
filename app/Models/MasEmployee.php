@@ -14,23 +14,20 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 
 
-class MasEmployee extends FilamentUser implements Authenticatable
+class MasEmployee extends FilamentUser
 {
-        use HasRoles;
-        use AuthenticableTrait;
 
         protected $table = 'mas_employees';
-
-        protected $primaryKey = 'emp_id';
 
         protected $password = 'password';
 
         protected $fillable = [
-            "emp_id",
+            "id",
             "email",
             "first_name",
             "middle_name",
             "last_name",
+            "emp_id",
             "grade_id",
             "grade_step_id",
             "created_by",
@@ -75,21 +72,21 @@ class MasEmployee extends FilamentUser implements Authenticatable
         }
     }
 
-    protected static function boot()
-    {
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     parent::boot();
     
-        static::creating(function ($employee) {
-            $latestEmployee = static::orderBy('emp_id', 'desc')->first();
+    //     static::creating(function ($employee) {
+    //         $latestEmployee = static::orderBy('emp_id', 'desc')->first();
     
-            if ($latestEmployee) {
-                $lastEmpId = (int) $latestEmployee->emp_id;
-                $nextEmpId = $lastEmpId + 1;
-                $employee->emp_id = $nextEmpId;
-            } else {
-                $employee->emp_id = 1; // First employee
-            }
-        });
-    }
+    //         if ($latestEmployee) {
+    //             $lastEmpId = (int) $latestEmployee->emp_id;
+    //             $nextEmpId = $lastEmpId + 1;
+    //             $employee->emp_id = $nextEmpId;
+    //         } else {
+    //             $employee->emp_id = 1; // First employee
+    //         }
+    //     });
+    // }
     
 }
