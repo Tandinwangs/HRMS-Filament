@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\HolidayTypeResource\Pages;
-use App\Filament\Resources\HolidayTypeResource\RelationManagers;
-use App\Models\HolidayType;
+use App\Filament\Resources\AdvanceTypeResource\Pages;
+use App\Filament\Resources\AdvanceTypeResource\RelationManagers;
+use App\Models\AdvanceType;
+use App\Models\ExpenseType;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,11 +14,13 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class HolidayTypeResource extends Resource
+class AdvanceTypeResource extends Resource
 {
-    protected static ?string $model = HolidayType::class;
+    protected static ?string $model = AdvanceType::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    protected static ?string $navigationGroup = 'Advance/Loan';
 
     public static function form(Form $form): Form
     {
@@ -25,7 +28,15 @@ class HolidayTypeResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(50),
+                    ->maxLength(255)
+                    ->unique(ignoreRecord:true),
+                    Forms\Components\Select::make('expense_type_id')
+                    ->options(
+                        ExpenseType::all()->pluck('name', 'id')->toArray()
+                    )->label('Expense Type'),
+                Forms\Components\DatePicker::make('start_date'),
+                Forms\Components\DatePicker::make('end_date')
+                ->after('start_date'),
                 Forms\Components\Toggle::make('status')
                     ->required(),
             ]);
@@ -36,12 +47,13 @@ class HolidayTypeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('expenseType.name'),
+                Tables\Columns\TextColumn::make('start_date')
+                    ->date(),
+                Tables\Columns\TextColumn::make('end_date')
+                    ->date(),
                 Tables\Columns\IconColumn::make('status')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
             ])
             ->filters([
                 //
@@ -64,9 +76,9 @@ class HolidayTypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListHolidayTypes::route('/'),
-            'create' => Pages\CreateHolidayType::route('/create'),
-            'edit' => Pages\EditHolidayType::route('/{record}/edit'),
+            'index' => Pages\ListAdvanceTypes::route('/'),
+            'create' => Pages\CreateAdvanceType::route('/create'),
+            'edit' => Pages\EditAdvanceType::route('/{record}/edit'),
         ];
     }    
 }

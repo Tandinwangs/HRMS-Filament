@@ -51,48 +51,4 @@ class Holiday extends Model
             }
         });
     }
-
-    protected static function booted()
-    {
-        static::saving(function ($holiday) {
-            $startDate = $holiday->start_date;
-            $endDate = $holiday->end_date;
-            $dayTypeStart = $holiday->optradioholidayfrom;
-            $dayTypeEnd = $holiday->optradioholidaylto;
-    
-            if ($endDate === null && $dayTypeStart === 'First Half') {
-                // Set end_date to start_date when 'First Half' is chosen
-                $holiday->end_date = $startDate;
-                $numberOfDays = 0.5;
-                   $holiday->number_of_days = $numberOfDays;
-            }else{
-                $numberOfDays = self::calculateNumberOfDays($startDate, $endDate, $dayTypeStart, $dayTypeEnd);
-            
-                // Set the number_of_days directly without relying on the form field
-                $holiday->number_of_days = $numberOfDays;
-            }
-       
-        });
-    }
-
-    private static function calculateNumberOfDays($startDate, $endDate, $dayTypeStart, $dayTypeEnd)
-    {
-        $startTimestamp = strtotime($startDate);
-        $endTimestamp = strtotime($endDate);
-
-        // Calculate the number of days
-        $numberOfDays = ceil(abs($endTimestamp - $startTimestamp) / 86400); // 86400 seconds in a day
-
-        // Adjust based on the selected time intervals
-        if ($dayTypeStart === 'First Half') {
-            $numberOfDays += 0.5;
-        }
-
-        if ($dayTypeEnd === 'First Half') {
-            $numberOfDays -= 0.5;
-        }
-
-        return $numberOfDays;
-    }
-    
 }

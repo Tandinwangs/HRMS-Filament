@@ -62,6 +62,10 @@ class MasEmployee extends FilamentUser
     }
     public function designation():BelongsTo{
         return $this->belongsTo(MasDesignation::class,'designation_id');
+    } 
+    public function expenseapplication()
+    {
+        return $this->hasMany(ExpenseApplication::class, 'user_id');
     }
 
     public function assignUserRole($roleName)

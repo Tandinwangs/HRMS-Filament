@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Scopes\CreatedByScope;
 use App\Scopes\EditedByScope;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HolidayType extends Model
 {
@@ -24,7 +23,7 @@ class HolidayType extends Model
         "edited_by",
     ];
     public function holidays(): HasMany{
-        return $this->hasMany(Holiday::class,'holidaytype_id');
+        return $this->hasMany(Holiday::class,'holiday_id');
     }
     
 

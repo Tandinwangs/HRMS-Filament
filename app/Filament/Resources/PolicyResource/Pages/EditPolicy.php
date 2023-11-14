@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\HolidayResource\Pages;
+namespace App\Filament\Resources\PolicyResource\Pages;
 
-use App\Filament\Resources\HolidayResource;
+use App\Filament\Resources\PolicyResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditHoliday extends EditRecord
+class EditPolicy extends EditRecord
 {
-    protected static string $resource = HolidayResource::class;
+    protected static string $resource = PolicyResource::class;
 
     protected function getActions(): array
     {
