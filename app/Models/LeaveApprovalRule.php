@@ -38,6 +38,12 @@ class LeaveApprovalRule extends Model
          return $this->hasMany(LeaveApprovalCondition::class, 'approval_rule_id');
      }
 
+     
+    public function LeaveFormulas()
+    {
+        return $this->hasMany(LeaveFormula::class, 'approval_rule_id');
+    }
+
      protected static function boot()
      {
          parent::boot();

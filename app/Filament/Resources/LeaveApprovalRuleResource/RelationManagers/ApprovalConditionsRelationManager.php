@@ -5,6 +5,8 @@ namespace App\Filament\Resources\LeaveApprovalRuleResource\RelationManagers;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use App\Filament\Resources\LeaveApprovalConditionResource\RelationManagers;
+use App\Filament\Resources\LeaveApprovalRuleResource\RelationManagers\LeaveFormulasRelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,7 +33,7 @@ class ApprovalConditionsRelationManager extends RelationManager
 
             Forms\Components\Select::make('hierarchy_id')->options(
                 Hierarchy::all()->pluck('name', 'id')->toArray()
-            )
+            ) ->default(Hierarchy::first()->id)
             ->visible(function(callable $get){
                 if(in_array((string)$get('approval_type'),["Hierarchy"])){
                     return true;
@@ -119,5 +121,12 @@ class ApprovalConditionsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }  
+    
+    public static function getRelations(): array
+    {
+        return [
+            LeaveFormulasRelationManager::class,
+        ];
+    }
 }

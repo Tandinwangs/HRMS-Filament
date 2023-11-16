@@ -77,6 +77,7 @@ class MasEmployeeResource extends Resource
                     'regular_period'=> "Regular",
                     'probation_period'=> "Probation",
                     'contract_period' => "Contract",
+                    'notice_period' => "Notice"
                 ])->required(),
                 Forms\Components\TextInput::make('password')
                     ->password()

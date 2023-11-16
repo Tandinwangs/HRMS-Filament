@@ -5,24 +5,35 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use App\Scopes\CreatedByScope;
 use App\Scopes\EditedByScope;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class MasGrade extends Model
+class LeaveFormula extends Model
 {
     use HasFactory, HasUuids;
+
     protected $fillable = [
-        "id",
-        "name",
-        "status",
-        "created_by",
-        "edited_by",
+        'approval_rule_id',
+        'condition',
+        'field',
+        'operator',
+        'value',
+        'employee_id',
+        'created_by', 
+        'updated_by'
     ];
-    public function gradeSteps(): HasMany{
-        return $this->hasMany(MasGradeStep::class,'grade_id');
+
+    public function employee() {
+        return $this->belongsTo(MasEmployee::class, 'employee_id');
     }
+
+    public function approvalRule()
+    {
+        return $this->belongsTo(LeaveApprovalRule::class, 'approval_rule_id');
+    }
+
 
     protected static function boot()
     {
@@ -40,5 +51,5 @@ class MasGrade extends Model
             }
         });
     }
-}
 
+}

@@ -2,26 +2,36 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
 use App\Scopes\CreatedByScope;
 use App\Scopes\EditedByScope;
 
-class MasGrade extends Model
+class LeaveApproval extends Model
 {
     use HasFactory, HasUuids;
+
     protected $fillable = [
-        "id",
-        "name",
-        "status",
-        "created_by",
-        "edited_by",
+        'applied_leave_id',
+        'level1',
+        'level2',
+        'level3',
+        'status',
+        'remark',
+        'created_by',
+        'edited_by'
     ];
-    public function gradeSteps(): HasMany{
-        return $this->hasMany(MasGradeStep::class,'grade_id');
+    
+
+    public function AppliedLeave() {
+        return $this->belongsTo(AppliedLeave::class, 'applied_leave_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(MasEmployee::class);
     }
 
     protected static function boot()
@@ -40,5 +50,5 @@ class MasGrade extends Model
             }
         });
     }
-}
 
+}

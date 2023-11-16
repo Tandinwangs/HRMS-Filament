@@ -16,6 +16,11 @@ class region extends Model
         'country_id', // Don't forget to include the foreign key field
     ];
 
+    public function holidays()
+    {
+        return $this->belongsToMany(Holiday::class, 'region_holiday', 'region_id', 'holiday_id');
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class);
@@ -25,8 +30,5 @@ class region extends Model
         return $this->hasMany(Dzongkhag::class);
     }
 
-    public function holidays()
-    {
-        return $this->belongsToMany(Holiday::class, 'region_holiday', 'region_id', 'holiday_id');
-    }
+   
 }

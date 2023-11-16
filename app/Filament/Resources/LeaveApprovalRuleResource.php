@@ -75,6 +75,7 @@ class LeaveApprovalRuleResource extends Resource
     {
         return [
             RelationManagers\ApprovalConditionsRelationManager::class,
+            RelationManagers\LeaveFormulasRelationManager::class,
         ];
     }
     

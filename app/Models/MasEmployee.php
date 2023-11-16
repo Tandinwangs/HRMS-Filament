@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
-
+use App\Models\LeaveType;
 
 class MasEmployee extends FilamentUser
 {
@@ -70,6 +70,47 @@ class MasEmployee extends FilamentUser
         if ($role) {
             $this->assignRole($role);
         }
+    }
+
+    public function appliedLeaves()
+    {
+        return $this->hasMany(AppliedLeave::class);
+    }
+
+    public function leaveBalance()
+    {
+        return $this->hasOne(LeaveBalance::class, 'employee_id');
+    }
+
+
+    public function leaveRules()
+    {
+        return $this->hasMany(LeaveRule::class, 'grade_step_id');
+    }
+
+    
+    protected static function boot()
+    {               
+        parent::boot();
+
+        // static::created(function ($employee) {
+        //     LeaveBalance::create(['employee_id' => $employee->id]);
+        // });
+
+        static::created(function ($employee) {
+            $casualLeaveType = LeaveType::where('name', 'Casual Leave')->first();
+            // Set the casual_leave_balance based on the matched LeaveRule
+            $employee->leaveBalance()->create([
+                'employee_id' => $employee->id,
+                'casual_leave_balance' =>$casualLeaveType? $casualLeaveType->LeavePolicy->LeaveRules()
+                    ->whereHas('gradeStep', function ($query) use ($employee) {
+                        $query->where('id', $employee->grade_step_id);
+                    })
+                    ->first()->duration ?? 0.0
+                : 0.0,
+                'earned_leave_balance' => 0.0  
+            ]);
+        });
     }
 
     // protected static function boot()

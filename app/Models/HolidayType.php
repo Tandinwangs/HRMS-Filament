@@ -43,5 +43,6 @@ class HolidayType extends Model
                 $model->edited_by = Auth::id();
             }
         });
+
     }
 }

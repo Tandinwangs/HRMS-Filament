@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MasEmployeeAuthController;
 use Illuminate\Support\Facades\Route;
-
+use App\Filament\Actions\DownloadFileAction;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/mas-employee-login', 'MasEmployeeAuthController@login');
+
+Route::get('/pdf-viewer/{file}', [\App\Http\Controllers\Controller::class,'download'])->name('pdf-viewer.show');
 
 require __DIR__.'/auth.php';

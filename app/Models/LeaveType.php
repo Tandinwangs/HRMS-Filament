@@ -27,6 +27,16 @@ class LeaveType extends Model
         return $this->hasOne(LeavePolicy::class, 'leave_id');
     }
 
+    public function scopeFilteredByGender($query, $userGender, $leavePlanGender)
+    {
+        return $query->where(function ($query) use ($userGender, $leavePlanGender) {
+            // Include leave types where gender restriction is 'A' or matches the user's gender
+            $query->where('gender', '=', 'A')
+                ->orWhere('gender', '=', $userGender)
+                ->orWhere('gender', '=', $leavePlanGender);
+        });
+    }
+
     protected static function boot()
     {
         parent::boot();

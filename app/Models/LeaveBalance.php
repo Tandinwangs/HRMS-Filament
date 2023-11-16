@@ -2,22 +2,23 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class LeaveBalance extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $fillable = [
-        'user_id',
+        'employee_id',
         'earned_leave_balance',
         'casual_leave_balance'
     ];
 
 
-    public function user()
+    public function employee()
     {
-        return $this->belongsTo(MasEmployee::class, 'user_id');
+        return $this->belongsTo(MasEmployee::class, 'employee_id');
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use App\Scopes\CreatedByScope;
 use App\Scopes\EditedByScope;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class LeaveApprovalCondition extends Model
 {
@@ -38,6 +39,7 @@ class LeaveApprovalCondition extends Model
     {
         return $this->belongsTo(MasEmployee::class, 'employee_id');
     }
+
 
     protected static function boot()
      {

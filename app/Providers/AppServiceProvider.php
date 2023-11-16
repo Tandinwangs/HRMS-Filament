@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Filament\Actions\DownloadFileAction;
 
 class AppServiceProvider extends ServiceProvider
 {

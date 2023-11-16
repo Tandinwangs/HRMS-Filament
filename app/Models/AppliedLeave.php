@@ -9,36 +9,39 @@ use Illuminate\Database\Eloquent\Model;
 use App\Scopes\CreatedByScope;
 use App\Scopes\EditedByScope;
 
-class Holiday extends Model
+class AppliedLeave extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $casts = [
-        'region_id' => 'array',
+    protected $fillable = [
+        'employee_id',
+        'leave_id',
+        'start_date',
+        'end_date',
+        'number_of_days',
+        'file_path',
+        'remark',
+        'created_by',
+        'edited_by'
     ];
     
 
-    protected $fillable = [
-        'name',
-        'year',
-        'holidaytype_id',
-        'optradioholidayfrom',
-        'start_date',
-        'optradioholidaylto',
-        'end_date',
-        'number_of_days',
-        'description',
-        'region_id'
-    ];
-
-    public function holidayType()
-    {
-        return $this->belongsTo(HolidayType::class, 'holidaytype_id');
+    public function employee() {
+        return $this->belongsTo(MasEmployee::class, 'employee_id');
     }
 
-    public function regions()
+    public function leavetype(){
+        return $this->belongsTo(LeaveType::class, 'leave_id');
+    }
+
+    public function user()
     {
-        return $this->belongsToMany(Region::class, 'region_holidays', 'holiday_id', 'region_id')->withTimestamps();;
+        return $this->belongsTo(MasEmployee::class);
+    }
+
+    public function leaveApproval()
+    {
+        return $this->hasOne(leaveApproval::class);
     }
 
     protected static function boot()
@@ -56,18 +59,12 @@ class Holiday extends Model
                 $model->edited_by = Auth::id();
             }
         });
-    }
 
-    protected static function booted()
-    {
-        static::created(function ($holiday) {
-            // Assuming $holiday->region_id is an array
-            $regionIds = $holiday->region_id;
-            $holiday->regions()->sync($regionIds);
+        static::created(function ($leave) {
+            // Set the casual_leave_balance based on the matched LeaveRule
+            $leave->leaveApproval()->create([
+                'applied_leave_id' => $leave->id
+            ]);
         });
-        
     }
-
-
-    
 }
