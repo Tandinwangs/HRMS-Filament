@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use PhpOption\None;
 use Closure;
+use Ramsey\Uuid\Type\Decimal;
 
 class ApplyAdvanceResource extends Resource
 {
@@ -77,7 +78,8 @@ class ApplyAdvanceResource extends Resource
                     return false;
                 })->afterStateUpdated(function ($state, Closure $set){
                     $amount = DeviceEMI::whereRaw("id =?", [$state])->value("amount");
-                    $set('amount',$amount);
+                    // dd($amount);
+                    $set('amount', $amount);
                 }),
                 Forms\Components\TextInput::make('amount')  
                 ->required() 
@@ -314,7 +316,8 @@ class ApplyAdvanceResource extends Resource
                     return false;
                 }),
                 Forms\Components\Textarea::make('purpose'),
-                Forms\Components\FileUpload::make('upload_file')                   
+                Forms\Components\FileUpload::make('upload_file')
+                ->preserveFilenames()                   
 
           
 

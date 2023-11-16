@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\TransferStats;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,5 +25,10 @@ class MasGradeStep extends Model
 
     public function grade(): BelongsTo{
         return $this->belongsTo(MasGrade::class,'grade_id');
+    }
+
+    public function transfer()
+    {
+        return $this->hasMany(TransferStats::class, 'basic_pay');
     }
 }

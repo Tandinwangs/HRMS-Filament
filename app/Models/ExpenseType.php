@@ -22,6 +22,10 @@ class ExpenseType extends Model
     {
         return $this->hasOne(Policy::class);
     }
+    public function dsasettlement()
+    {
+        return $this->hasMany(DSASettlement::class);
+    }
 
 
 }

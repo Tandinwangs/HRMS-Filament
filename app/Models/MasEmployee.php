@@ -67,6 +67,14 @@ class MasEmployee extends FilamentUser
     {
         return $this->hasMany(ExpenseApplication::class, 'user_id');
     }
+    public function dsasettlement()
+    {
+        return $this->hasMany(DSASettlement::class, 'user_id');
+    }
+    public function fuel()
+    {
+        return $this->hasMany(Fuel::class, 'user_id');
+    }
 
     public function assignUserRole($roleName)
     {

@@ -113,7 +113,8 @@ class ExpenseApplicationResource extends Resource
                         }
                         return false;
                     }),    
-                    Forms\Components\FileUpload::make('attachment')                   
+                    Forms\Components\FileUpload::make('attachment') 
+                    ->preserveFilenames()                  
                 ]);
     }
 

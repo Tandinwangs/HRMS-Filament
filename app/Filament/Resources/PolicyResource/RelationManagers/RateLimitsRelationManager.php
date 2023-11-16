@@ -67,7 +67,8 @@ class RateLimitsRelationManager extends RelationManager
                 ->dateTime(),
     
                 Tables\Columns\IconColumn::make('status')
-                ->boolean(),             ])
+                ->boolean(),             
+                ])
             ->filters([
                 //
             ])

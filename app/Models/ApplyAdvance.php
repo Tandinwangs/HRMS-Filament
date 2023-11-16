@@ -41,30 +41,5 @@ class ApplyAdvance extends Model
     {
         return $this->belongsTo(DeviceEMI::class, 'item_type');
     }
-
-    protected static function booted()
-    {
-        static::saving(function ($model) {
-            info('Saving event triggered.'); // Log statement
-            $model->calculateAndSetAmounts();
-        });
-    }
-
-    public function calculateAndSetAmounts()
-    {
-        $amount = $this->amount;
-        $interestRate = $this->interest_rate;
-        $emiCount = $this->emi_count;
-         info($amount);
-
-        // Perform your calculations
-        $totalAmount = $amount + ($interestRate * ($amount / 100));
-        $monthlyEMI = $totalAmount / $emiCount;
-
-        // Set the calculated values to the model fields
-        $this->total_amount = $totalAmount;
-        $this->monthly_emi_amount = $monthlyEMI;
-    }
-
    
 }
