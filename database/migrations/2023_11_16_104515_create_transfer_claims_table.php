@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('designation');
             $table->string('department');
-            $table->uuid('basic_pay');
+            $table->string('basic_pay');
             $table->string('transfer_claim_type');
             $table->string('current_location');
             $table->string('new_location');
@@ -32,7 +32,6 @@ return new class extends Migration
             $table->uuid('expense_type_id');
             $table->foreign('expense_type_id')->references('id')->on('expense_types')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('mas_employees')->onDelete('cascade');
-            $table->foreign('basic_pay')->references('id')->on('mas_grade_steps')->onDelete('cascade');
             $table->text('remark')->nullable();
             $table->timestamps();
         });

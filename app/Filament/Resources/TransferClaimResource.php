@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\TransferClaimResource\Pages;
 use App\Filament\Resources\TransferClaimResource\RelationManagers;
 use App\Models\TransferClaim;
+use App\Models\ExpenseType;
 use App\Models\MasEmployee;
+use App\Models\RateDefinition;
+use App\Models\policy;
 use App\Models\MasDesignation;
 use App\Models\MasGradeStep;
 use App\Models\department;
@@ -17,7 +20,10 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Closure;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 class TransferClaimResource extends Resource
 {
@@ -45,14 +51,30 @@ class TransferClaimResource extends Resource
          $grade_step = MasGradeStep::find($gradestepId);
          $basic_pay = $grade_step->starting_salary;
 
+         $expenseType = ExpenseType::where('name', 'Transfer Claim')->first();
+         if($expenseType){
+            $expense = $expenseType->id;
 
-
+         }else{
+            $expense = null;
+         }
         
 
-
+       
 
         return $form
             ->schema([
+                Forms\Components\Hidden::make('expense_type_id')
+                ->label("Expense Type")
+                ->default($expense)
+                ->disabled()
+                ->reactive()
+                ->required()
+                ->afterStateHydrated(function ($state, Closure $set){
+                    $policy = policy::where('expense_type_id', $state)->value('id');
+                    $attachment_required = RateDefinition::where('policy_id', $policy)->value('attachment_required');
+                    $set('attachment_required', $attachment_required);
+                }),
                 Forms\Components\Hidden::make('user_id')
                 ->default($currentUserId)
                 ->disabled()
@@ -78,8 +100,40 @@ class TransferClaimResource extends Resource
                 ->default($basic_pay)
                 ->disabled()
                 ->required(),
-
-
+                Forms\Components\Select::make('transfer_claim_type')
+                ->options([
+                    'Transfer Grant' => 'Transfer Grant',
+                    'Carriage Charge' => 'Carriage Charge',
+                ]) 
+                ->label("Transfer Type")  
+                ->reactive()         
+                ->required(),
+               
+                Forms\Components\TextInput::make('current_location')
+                ->required(),
+                Forms\Components\TextInput::make('new_location')
+                ->required(),
+                Forms\Components\TextInput::make('distance_km')
+                ->required()
+                ->visible(function(callable $get){
+                    if(in_array((string)$get('transfer_claim_type'),["Carriage Charge"])){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }),
+                Forms\Components\TextInput::make('claim_amount')
+                ->required(),
+                Forms\Components\FileUpload::make('attachment')
+                ->preserveFilenames()
+                ->required(function(callable $get){
+                    if($get('attachment_required') == true){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }) 
+   
             ]);
 
     }
@@ -88,13 +142,32 @@ class TransferClaimResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('date')
+                ->dateTime(),
+                Tables\Columns\TextColumn::make('transfer_claim_type'),
+                Tables\Columns\TextColumn::make('claim_amount'),
+                Tables\Columns\TextColumn::make('current_location'),
+                Tables\Columns\TextColumn::make('new_location'),
+                Tables\Columns\TextColumn::make('status'),
+
+
+
+
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                ->action(fn (TransferClaim $record) => TransferClaimResource::downloadFile($record))
+                ->hidden(function ( TransferClaim $record) {
+                    return $record->attachment === null;
+                })
+            
+
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -115,5 +188,17 @@ class TransferClaimResource extends Resource
             'create' => Pages\CreateTransferClaim::route('/create'),
             'edit' => Pages\EditTransferClaim::route('/{record}/edit'),
         ];
-    }    
+    }  
+    public static function downloadFile($record)
+    {
+        // Use Storage::url to generate the proper URL for the file
+        $attachment = 'uploads/' . $record->attachment; // assuming 'public' is the disk name
+
+        // Check if the file exists in storage
+        if (!Storage::exists($attachment)) {
+            abort(404, 'File not found');
+        }
+    
+        return Storage::download($attachment);
+    }  
 }

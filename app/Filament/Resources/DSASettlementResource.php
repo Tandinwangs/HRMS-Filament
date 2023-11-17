@@ -7,6 +7,8 @@ use App\Filament\Resources\DSASettlementResource\Pages;
 use App\Filament\Resources\DSASettlementResource\RelationManagers;
 use App\Models\ApplyAdvance;
 use App\Models\RateLimit;
+use App\Models\policy;
+use App\Models\RateDefinition;
 use App\Models\DSAManual;
 use App\Models\DSASettlement;
 use App\Models\ExpenseType;
@@ -21,6 +23,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 use Closure;
 use Symfony\Contracts\Service\Attribute\Required;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 class DSASettlementResource extends Resource
 {
@@ -34,7 +38,12 @@ class DSASettlementResource extends Resource
     public static function form(Form $form): Form
      {
         $expenseType = ExpenseType::where('name', 'DSA Settlement')->first();
-                    
+        if($expenseType){
+            $expense = $expenseType->id;
+
+         }else{
+            $expense = null;
+         }                    
         if ($expenseType) {
             // Find the Policies associated with the ExpenseType
             $policies = $expenseType->policies;
@@ -56,7 +65,7 @@ class DSASettlementResource extends Resource
                 $da = $rateLimit->limit_amount;
             }
         } else {
-            $da = 0; // Handle the case where the DSA policy doesn't exist
+            $da = "no da set"; // Handle the case where the DSA policy doesn't exist
         }
 
 
@@ -81,6 +90,17 @@ class DSASettlementResource extends Resource
 
         return $form
             ->schema([
+                Forms\Components\Hidden::make('expensetype_id')
+                ->label("Expense Type")
+                ->default($expense)
+                ->disabled()
+                ->reactive()
+                ->required()
+                ->afterStateHydrated(function ($state, Closure $set){
+                    $policy = policy::where('expense_type_id', $state)->value('id');
+                    $attachment_required = RateDefinition::where('policy_id', $policy)->value('attachment_required');
+                    $set('attachment_required', $attachment_required);
+                }),
                 Forms\Components\Hidden::make('user_id')
                 ->default($currentUserId)
                 ->disabled()
@@ -118,10 +138,24 @@ class DSASettlementResource extends Resource
                 //->required()
                 ->disabled(),
                 Forms\Components\FileUpload::make('upload_file')
-                ->preserveFilenames(),
+                ->preserveFilenames()
+                ->required(function(callable $get){
+                    if($get('attachment_required') == true){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }),
 
                 
                 Forms\Components\Card::make()
+                ->afterStateUpdated(function ( Closure $set, $get){
+                    $totalAmount = $get('total_amount');
+                     dd($totalAmount);
+                    $set('total_amount_adjusted', $totalAmount);
+                    $set('net_payable_amount', $totalAmount);
+
+                })
                 ->schema([
                  Forms\Components\Repeater::make('DSAManual')
                 ->columns(5)
@@ -131,18 +165,9 @@ class DSASettlementResource extends Resource
                         return true;
                     }
                     return false;
-                })
-                ->relationship()
-                ->afterStateUpdated(function ( Closure $set, $get){
-                    $totaldays = $get('total_days');
-                    $da = $get('da');
-                    $ta = $get('ta');
-                    // dd($amount);
-                    $totalAmount = ($da*$totaldays)+$ta;
-                    $set('total_amount_adjusted', $totalAmount);
-                    $set('net_payable_amount', $totalAmount);
 
                 })
+                ->relationship()
                 ->columnSpanFull()
                 ->schema([
                     Forms\Components\Hidden::make('user_id')
@@ -199,7 +224,7 @@ class DSASettlementResource extends Resource
                     ->rows(1)
                     ->required(),
                 ])->createItemButtonLabel('Add')
-                ])
+                ]) 
             ]);
     }
   
@@ -219,6 +244,11 @@ class DSASettlementResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                ->action(fn (DSASettlement $record) => DSASettlementResource::downloadFile($record))
+                ->hidden(function ( DSASettlement $record) {
+                    return $record->upload_file === null;
+                })
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -239,5 +269,17 @@ class DSASettlementResource extends Resource
             'create' => Pages\CreateDSASettlement::route('/create'),
             'edit' => Pages\EditDSASettlement::route('/{record}/edit'),
         ];
-    }    
+    } 
+    public static function downloadFile($record)
+    {
+        // Use Storage::url to generate the proper URL for the file
+        $upload_file = 'uploads/' . $record->upload_file; // assuming 'uploads' is the disk name
+
+        // Check if the file exists in storage
+        if (!Storage::exists($upload_file)) {
+            abort(404, 'File not found');
+        }
+    
+        return Storage::download($upload_file);
+    }     
 }

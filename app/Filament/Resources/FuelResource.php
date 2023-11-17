@@ -6,6 +6,9 @@ use App\Filament\Resources\FuelResource\Pages;
 use App\Filament\Resources\FuelResource\RelationManagers;
 use App\Models\Fuel;
 use App\Models\vehicle;
+use App\Models\policy;
+use App\Models\ExpenseType;
+use App\Models\RateDefinition;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -16,6 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 use Closure;
 use Ramsey\Uuid\Type\Decimal;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 class FuelResource extends Resource
 {
@@ -30,8 +35,27 @@ class FuelResource extends Resource
     {
         $currentUserId = Auth::id();
 
+        $expenseType = ExpenseType::where('name', 'Transfer Claim')->first();
+        if($expenseType){
+            $expense = $expenseType->id;
+
+         }else{
+            $expense = null;
+         }
+
+       
+
         return $form
             ->schema([
+                Forms\Components\Hidden::make('expense_type_id')
+                ->default($expense)
+                ->disabled()
+                ->required()
+                ->afterStateHydrated(function ($state, Closure $set){
+                    $policy = policy::where('expense_type_id', $state)->value('id');
+                    $attachment_required = RateDefinition::where('policy_id', $policy)->value('attachment_required');
+                    $set('attachment_required', $attachment_required);
+                }),
                 Forms\Components\Hidden::make('user_id')
                 ->default($currentUserId)
                 ->disabled()
@@ -48,6 +72,7 @@ class FuelResource extends Resource
                     vehicle::all()->pluck('vehicle_number', 'id')->toArray()
                 )
                 ->label('Vechicle Number')
+                ->searchable()
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function ($state, Closure $set){
@@ -102,7 +127,14 @@ class FuelResource extends Resource
                 ->required()
                 ->reactive(),
                 Forms\Components\FileUpload::make('attachment')
-                ->preserveFilenames()                   
+                ->preserveFilenames()
+                ->required(function(callable $get){
+                    if($get('attachment_required') == true){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                })                    
             ]);
     }
 
@@ -132,6 +164,11 @@ class FuelResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                ->action(fn (Fuel $record) => FuelResource::downloadFile($record))
+                ->hidden(function ( Fuel $record) {
+                    return $record->attachment === null;
+                })
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -152,5 +189,17 @@ class FuelResource extends Resource
             'create' => Pages\CreateFuel::route('/create'),
             'edit' => Pages\EditFuel::route('/{record}/edit'),
         ];
-    }    
+    } 
+    public static function downloadFile($record)
+    {
+        // Use Storage::url to generate the proper URL for the file
+        $attachment = 'uploads/' . $record->attachment; // assuming 'public' is the disk name
+
+        // Check if the file exists in storage
+        if (!Storage::exists($attachment)) {
+            abort(404, 'File not found');
+        }
+    
+        return Storage::download($attachment);
+    }   
 }

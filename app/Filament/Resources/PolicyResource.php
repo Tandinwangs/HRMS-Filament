@@ -39,7 +39,8 @@ class PolicyResource extends Resource
                 Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-                Forms\Components\TextInput::make('description'),
+                Forms\Components\Textarea::make('description')
+                ->rows(2),
                 Forms\Components\DateTimePicker::make('start_date')
                 ->required(),
                 Forms\Components\DateTimePicker::make('end_date')

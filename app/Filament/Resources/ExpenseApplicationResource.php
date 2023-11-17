@@ -6,6 +6,8 @@ use App\Filament\Resources\ExpenseApplicationResource\Pages;
 use App\Filament\Resources\ExpenseApplicationResource\RelationManagers;
 use App\Models\ExpenseApplication;
 use App\Models\ExpenseType;
+use App\Models\policy;
+use App\Models\RateDefinition;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -15,6 +17,11 @@ use Filament\Tables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Closure;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class ExpenseApplicationResource extends Resource
 {
@@ -38,17 +45,27 @@ class ExpenseApplicationResource extends Resource
                 ->required(),
                 Forms\Components\Select::make('expense_type_id')
                     ->options(
-                        ExpenseType::all()->pluck('name', 'id')->toArray()
+                        //ExpenseType::all()->pluck('name', 'id')->toArray()
+                        ExpenseType::whereNotIn('name', ['DSA Settlement', 'Expense Fuel', 'Transfer Claim'])->pluck('name', 'id')->toArray()
+
                     )
                     ->label('Expense Type')
                     ->required()
-                    ->reactive(),
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, Closure $set){
+                        $policy = policy::where('expense_type_id', $state)->value('id');
+                        $attachment_required = RateDefinition::where('policy_id', $policy)->value('attachment_required');
+                        $set('attachment_required', $attachment_required);
+ 
+                    }),
+
                     Forms\Components\TextInput::make('application_date')
                     ->type('date')
                     ->default(now()->toDateString())  // Set default value to current date
                     ->disabled()  // Make the field disabled
                     ->required(),
                 Forms\Components\Textarea::make('description')
+                    ->rows(2)
                     ->required(),
                 Forms\Components\TextInput::make('amount')
                     ->required()
@@ -114,7 +131,14 @@ class ExpenseApplicationResource extends Resource
                         return false;
                     }),    
                     Forms\Components\FileUpload::make('attachment') 
-                    ->preserveFilenames()                  
+                    ->preserveFilenames()
+                    ->required(function(callable $get){
+                        if($get('attachment_required') == true){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    })                  
                 ]);
     }
 
@@ -137,6 +161,11 @@ class ExpenseApplicationResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                ->action(fn (ExpenseApplication $record) => ExpenseApplicationResource::downloadFile($record))
+                ->hidden(function ( ExpenseApplication $record) {
+                    return $record->attachment === null;
+                })
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -157,5 +186,18 @@ class ExpenseApplicationResource extends Resource
             'create' => Pages\CreateExpenseApplication::route('/create'),
             'edit' => Pages\EditExpenseApplication::route('/{record}/edit'),
         ];
-    }    
+    }  
+    
+    public static function downloadFile($record)
+    {
+        // Use Storage::url to generate the proper URL for the file
+        $attachment = 'uploads/' . $record->attachment; // assuming 'public' is the disk name
+
+        // Check if the file exists in storage
+        if (!Storage::exists($attachment)) {
+            abort(404, 'File not found');
+        }
+    
+        return Storage::download($attachment);
+    }
 }

@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use PhpOption\None;
 use Closure;
 use Ramsey\Uuid\Type\Decimal;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 class ApplyAdvanceResource extends Resource
 {
@@ -69,6 +71,7 @@ class ApplyAdvanceResource extends Resource
                 ->options(DeviceEMI::all()->pluck('type', 'id')->toArray())
                 ->label('Item Type')
                 ->reactive()
+                ->searchable()
                 ->required()
                 ->visible(function ($get) use ($advanceTypes) {
                     $selectedAdvanceTypeId = $get('advance_type_id');
@@ -315,7 +318,8 @@ class ApplyAdvanceResource extends Resource
                     
                     return false;
                 }),
-                Forms\Components\Textarea::make('purpose'),
+                Forms\Components\Textarea::make('purpose')
+                ->rows(2),
                 Forms\Components\FileUpload::make('upload_file')
                 ->preserveFilenames()                   
 
@@ -339,18 +343,18 @@ class ApplyAdvanceResource extends Resource
                 Tables\Columns\TextColumn::make('amount'),
                 Tables\Columns\TextColumn::make('status'),
 
-
-
-
-
-
-
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('Download')
+                ->action(fn (ApplyAdvance $record) => ApplyAdvanceResource::downloadFile($record))
+                ->hidden(function ( ApplyAdvance $record) {
+                    return $record->upload_file === null;
+                })
+
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -370,5 +374,17 @@ class ApplyAdvanceResource extends Resource
             'create' => Pages\CreateApplyAdvance::route('/create'),
             'edit' => Pages\EditApplyAdvance::route('/{record}/edit'),
         ];
-    }    
+    } 
+    public static function downloadFile($record)
+    {
+        // Use Storage::url to generate the proper URL for the file
+        $upload_file = 'uploads/' . $record->upload_file; // assuming 'public' is the disk name
+
+        // Check if the file exists in storage
+        if (!Storage::exists($upload_file)) {
+            abort(404, 'File not found');
+        }
+    
+        return Storage::download($upload_file);
+    }   
 }
