@@ -279,6 +279,7 @@ class DSASettlementResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Action::make('Download')
                 ->action(fn (DSASettlement $record) => DSASettlementResource::downloadFile($record))

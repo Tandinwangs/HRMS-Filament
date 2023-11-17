@@ -165,6 +165,7 @@ class FuelResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Action::make('Download')
                 ->action(fn (Fuel $record) => FuelResource::downloadFile($record))

@@ -7,6 +7,7 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use App\Models\Policy;
+use App\Models\RateDefinition;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -74,9 +75,21 @@ class RateDefinitionsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                ->hidden(function ($record) {
+                    // Check if $record is an instance of RateDefinition
+                    if ($record instanceof \App\Models\RateDefinition) {
+                        // Your logic for non-null $record
+                        return true;
+                    } else {
+                        // Handle the case where $record is null
+                        return false; // Or provide an appropriate default behavior
+                    }
+                }),
+            
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

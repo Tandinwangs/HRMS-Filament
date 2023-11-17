@@ -348,6 +348,7 @@ class ApplyAdvanceResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Action::make('Download')
                 ->action(fn (ApplyAdvance $record) => ApplyAdvanceResource::downloadFile($record))

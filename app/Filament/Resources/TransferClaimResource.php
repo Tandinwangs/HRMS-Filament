@@ -159,6 +159,7 @@ class TransferClaimResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Action::make('Download')
                 ->action(fn (TransferClaim $record) => TransferClaimResource::downloadFile($record))
