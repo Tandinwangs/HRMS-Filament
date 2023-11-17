@@ -103,6 +103,7 @@ class FuelResource extends Resource
                     $mileage = $get('mileage');
                     // dd($amount);
                     $quantity = ($finalkm - $initialkm) / $mileage;
+                    $quantity = round($quantity, 2);
                     $set('quantity',$quantity);
                 }),
                 Forms\Components\TextInput::make('quantity')
@@ -119,6 +120,7 @@ class FuelResource extends Resource
                     $quantity = $get('quantity');
                     // dd($amount);
                     $amount = $rate * $quantity;
+                    $amount = round($amount,2);
                     $set('amount',$amount);
                 }),
                 Forms\Components\TextInput::make('amount')

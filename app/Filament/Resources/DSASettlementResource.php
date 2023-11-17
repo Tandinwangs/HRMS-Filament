@@ -116,27 +116,62 @@ class DSASettlementResource extends Resource
                 ->reactive()
                 ->afterStateUpdated(function ($state, Closure $set){
                     $advance = ApplyAdvance::whereRaw("id =?", [$state])->value("amount");
+                    $advance = round($advance,2);
                     $set('advance_amount', $advance);
                     $set('total_amount_adjusted', $advance);
                     $set('net_payable_amount', $advance);
                     $set('balance_amount', 0); 
+                })
+                ->required(function ($get) use ($userAdvances){
+                    if(!$userAdvances->isEmpty()) {
+                        return true;
+                    }
+                    return false;
+
                 }),
                 Forms\Components\TextInput::make('advance_amount')
                 //->required()
                 ->disabled()
                 ->default(0)
-                ->reactive(),
+                ->reactive()
+                ->required(function ($get) use ($userAdvances){
+                    if(!$userAdvances->isEmpty()) {
+                        return true;
+                    }
+                    return false;
+
+                }),
                 Forms\Components\TextInput::make('total_amount_adjusted')
                 //->required()
                 ->disabled()
-                ->reactive(),
+                ->reactive()
+                ->required(function ($get) use ($userAdvances){
+                    if(!$userAdvances->isEmpty()) {
+                        return true;
+                    }
+                    return false;
+
+                }),
                 Forms\Components\TextInput::make('net_payable_amount')
-                //->required()
                 ->disabled()
-                ->reactive(),
+                ->reactive()
+                ->required(function ($get) use ($userAdvances){
+                    if(!$userAdvances->isEmpty()) {
+                        return true;
+                    }
+                    return false;
+
+                }),
                 Forms\Components\TextInput::make('balance_amount')
-                //->required()
-                ->disabled(),
+                ->default(0)
+                ->disabled()
+                ->required(function ($get) use ($userAdvances){
+                    if(!$userAdvances->isEmpty()) {
+                        return true;
+                    }
+                    return false;
+
+                }),
                 Forms\Components\FileUpload::make('upload_file')
                 ->preserveFilenames()
                 ->required(function(callable $get){
@@ -212,6 +247,7 @@ class DSASettlementResource extends Resource
                         $da = $get('da');
                         // dd($amount);
                         $totalAmount = ($da*$totaldays)+$state;
+                        $totalAmount = round($totalAmount,2);
                         $set('total_amount',$totalAmount);
                         $set('total_amount_adjusted', $totalAmount);
                         $set('net_payable_amount', $totalAmount);
