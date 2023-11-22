@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('location');
             $table->date('application_date');
             $table->uuid('vehicle_no');
-            $table->foreign('vehicle_no')->references('id')->on('vehicles')->onDelete('cascade');
+            $table->foreign('vehicle_no')->references('id')->on('add_vehicles')->onDelete('cascade');
+            $table->string('vehicle_type');
             $table->date('date');
             $table->string('initial_km');
             $table->string('final_km');

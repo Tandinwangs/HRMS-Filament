@@ -14,6 +14,7 @@ use App\Models\DSASettlement;
 use App\Models\ExpenseType;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Forms;
+use Illuminate\Validation\ValidationException;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\DB;
 use Closure;
+use Doctrine\DBAL\Driver\OCI8\Exception\Error;
 use Symfony\Contracts\Service\Attribute\Required;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Storage;
@@ -34,19 +36,26 @@ class DSASettlementResource extends Resource
 
     protected static ?string $navigationGroup = 'Expense';
 
+    protected static ?string $navigationLabel = 'DSA Settlement';
+
+
+    protected static ?int $navigationSort = 4;
+
+
+
+
+
+
+
 
     public static function form(Form $form): Form
      {
-        $expenseType = ExpenseType::where('name', 'DSA Settlement')->first();
-        if($expenseType){
-            $expense = $expenseType->id;
-
-         }else{
-            $expense = null;
-         }                    
-        if ($expenseType) {
+        // $expenseType = ExpenseType::where('name', 'DSA Settlement')->first();
+        $expense = DSA_ID;
+       
+        if ($expense) {
             // Find the Policies associated with the ExpenseType
-            $policies = $expenseType->policies;
+            $policies = Policy::where('expense_type_id', $expense)->get();
             
             // Get policy IDs
             $policyIds = $policies->pluck('id')->toArray();
@@ -90,7 +99,7 @@ class DSASettlementResource extends Resource
 
         return $form
             ->schema([
-                Forms\Components\Hidden::make('expensetype_id')
+                Forms\Components\hidden::make('expensetype_id')
                 ->label("Expense Type")
                 ->default($expense)
                 ->disabled()
@@ -143,6 +152,7 @@ class DSASettlementResource extends Resource
                 }),
                 Forms\Components\TextInput::make('total_amount_adjusted')
                 //->required()
+                ->default(100)
                 ->disabled()
                 ->reactive()
                 ->required(function ($get) use ($userAdvances){
@@ -184,13 +194,6 @@ class DSASettlementResource extends Resource
 
                 
                 Forms\Components\Card::make()
-                ->afterStateUpdated(function ( Closure $set, $get){
-                    $totalAmount = $get('total_amount');
-                     dd($totalAmount);
-                    $set('total_amount_adjusted', $totalAmount);
-                    $set('net_payable_amount', $totalAmount);
-
-                })
                 ->schema([
                  Forms\Components\Repeater::make('DSAManual')
                 ->columns(5)
@@ -226,6 +229,23 @@ class DSASettlementResource extends Resource
                             // Calculate the number of full days
                             $numberOfDays = floor($diff / (24 * 60 * 60)) + 1;
                             $set('total_days', $numberOfDays);
+
+                            $allRows = $get('../../DSAManual');
+                            $seenDates = array();
+                            
+                            foreach ($allRows as $key => $singleRow) {
+                                $currentDate = $singleRow['to_date'];
+                            
+                                if (in_array($currentDate, $seenDates)) {
+                                    echo "Error: Duplicate to_date found - $currentDate";
+                                    dd('same to dates');
+                                    $seenDates = null;
+                                } else {
+                                    $seenDates[] = $currentDate;
+                                }
+                            }
+
+                            
                     }),
                     Forms\Components\TextInput::make('to_location')
                     ->required(),
@@ -243,24 +263,34 @@ class DSASettlementResource extends Resource
                     ->numeric()
                     ->required()
                     ->afterStateUpdated(function ($state, Closure $set, $get){
-                        $totaldays = $get('total_days');
-                        $da = $get('da');
-                        // dd($amount);
-                        $totalAmount = ($da*$totaldays)+$state;
-                        $totalAmount = round($totalAmount,2);
-                        $set('total_amount',$totalAmount);
-                        $set('total_amount_adjusted', $totalAmount);
-                        $set('net_payable_amount', $totalAmount);
+                        $rowTotaldays = $get('total_days');
+                        $rowDa = $get('da');
+                        $rowTotal = ($rowDa*$rowTotaldays)+$state;
+                        $set('total_amount',(round($rowTotal,2)));
+                        //GRAND TOTAL CALC
+                        $allRows = $get('../../DSAManual');
+                        $grandTotalAmount = 0;
+                        foreach($allRows as $key=>$singleRow){
+                           $grandTotalAmount += $singleRow['total_amount'];
+                        }
+                        $set('../../total_amount_adjusted', $grandTotalAmount);
+                        $set('../../net_payable_amount', $grandTotalAmount);
+                        //END
+                        
+                        
 
                     }),
                     Forms\Components\TextInput::make('total_amount')
+                    ->reactive()
+                    ->numeric()
+                    ->default(0)
                     ->required()
                     ->disabled(),
                     Forms\Components\Textarea::make('remarks')
                     ->rows(1)
                     ->required(),
                 ])->createItemButtonLabel('Add')
-                ]) 
+                ])
             ]);
     }
   

@@ -21,13 +21,16 @@ use PhpOption\None;
 use Closure;
 use Ramsey\Uuid\Type\Decimal;
 use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Label;
 
 class ApplyAdvanceResource extends Resource
 {
     protected static ?string $model = ApplyAdvance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationLabel = 'Apply';
     protected static ?string $navigationGroup = 'Advance/Loan';
 
     
@@ -86,6 +89,7 @@ class ApplyAdvanceResource extends Resource
                 }),
                 Forms\Components\TextInput::make('amount')  
                 ->required() 
+                ->reactive()
                 ->numeric()
                 ->label('Amount')
                 ->disabled(function ($get) use ($advanceTypes) {
@@ -94,6 +98,14 @@ class ApplyAdvanceResource extends Resource
                         return true;
                     }
                     return false;
+                })->afterStateUpdated(function ($state, Closure $set, $get){
+                    $amount = null;
+                    $set('interest_rate',$amount);
+                    $set('emi_count',$amount);
+                    $set('total_amount', $amount);
+                    $set('monthly_emi_amount', $amount);
+
+                    //dd($set('interest_rate',$amount));
                 }),
                 Forms\Components\select::make('mode_of_travel')
                 ->options([
@@ -221,7 +233,11 @@ class ApplyAdvanceResource extends Resource
                     $amount = $get('amount');
                     // dd($amount);
                     $totalAmount = $amount + ($state * ($amount / 100));
+                    $totalAmount = round($totalAmount,2);
+                    $emi = null;
                     $set('total_amount',$totalAmount);
+                    $set('emi_count', $emi);
+                    $set('monthly_emi_amount',$emi);
                 }),
                 Forms\Components\TextInput::make('total_amount')
                 ->numeric()
@@ -273,6 +289,8 @@ class ApplyAdvanceResource extends Resource
                     $totalamount = $get('total_amount');
                     // dd($amount);
                     $monthlyEMI = $totalamount / $state;
+                    $monthlyEMI = round($monthlyEMI,2);
+
                     $set('monthly_emi_amount',$monthlyEMI);
                 }),
                 Forms\Components\TextInput::make('monthly_emi_amount')

@@ -19,6 +19,9 @@ class DeviceEMIResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationLabel = 'Device EMIs';
+
+
     protected static ?string $navigationGroup = 'Advance/Loan';
 
 

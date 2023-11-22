@@ -20,6 +20,11 @@ class ExpenseTypeResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Expense';
+    protected static ?int $navigationSort = 1;
+
+
+
+
 
 
     public static function form(Form $form): Form
@@ -64,7 +69,7 @@ class ExpenseTypeResource extends Resource
             Tables\Actions\ViewAction::make(),
         ])
         ->bulkActions([
-            Tables\Actions\DeleteBulkAction::make(),
+            //Tables\Actions\DeleteBulkAction::make(),
         ]);
 
 

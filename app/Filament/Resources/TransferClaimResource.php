@@ -31,6 +31,10 @@ class TransferClaimResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'Expense';
+    protected static ?string $navigationLabel = 'Transfer Claim';
+    protected static ?int $navigationSort = 6;
+
+
 
 
     public static function form(Form $form): Form
@@ -51,14 +55,14 @@ class TransferClaimResource extends Resource
          $grade_step = MasGradeStep::find($gradestepId);
          $basic_pay = $grade_step->starting_salary;
 
-         $expenseType = ExpenseType::where('name', 'Transfer Claim')->first();
-         if($expenseType){
-            $expense = $expenseType->id;
+        //  $expenseType = ExpenseType::where('name', 'Transfer Claim')->first();
+        //  if($expenseType){
+        //     $expense = $expenseType->id;
 
-         }else{
-            $expense = null;
-         }
-        
+        //  }else{
+        //     $expense = null;
+        //  }
+        $expense = TRANSFER_CLAIM_ID;
 
        
 

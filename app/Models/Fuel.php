@@ -16,6 +16,7 @@ class Fuel extends Model
         'location',
         'application_date',
         'date',
+        'vehicle_type',
         'vehicle_no',
         'initial_km',
         'final_km' ,
@@ -38,7 +39,7 @@ class Fuel extends Model
     }
     public function vehicle()
     {
-        return $this->belongsTo(Vehicle::class,'vehicle_no');
+        return $this->belongsTo(AddVehicle::class,'vehicle_no');
     }
 
     protected static function boot()

@@ -31,6 +31,13 @@ class ExpenseApplicationResource extends Resource
     
     protected static ?string $navigationGroup = 'Expense';
 
+    protected static ?string $navigationLabel = 'Apply';
+
+
+    protected static ?int $navigationSort = 3;
+
+
+
     public static function form(Form $form): Form
     {
         $currentUserId = Auth::id();

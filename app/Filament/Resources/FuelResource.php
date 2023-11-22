@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\FuelResource\Pages;
 use App\Filament\Resources\FuelResource\RelationManagers;
 use App\Models\Fuel;
-use App\Models\vehicle;
+use App\Models\AddVehicle;
 use App\Models\policy;
 use App\Models\ExpenseType;
 use App\Models\RateDefinition;
@@ -30,18 +30,19 @@ class FuelResource extends Resource
 
     protected static ?string $navigationGroup = 'Expense';
 
+    protected static ?string $navigationLabel = 'Fuel';
+
+
+    protected static ?int $navigationSort = 5;
+
+
+
 
     public static function form(Form $form): Form
     {
         $currentUserId = Auth::id();
 
-        $expenseType = ExpenseType::where('name', 'Transfer Claim')->first();
-        if($expenseType){
-            $expense = $expenseType->id;
-
-         }else{
-            $expense = null;
-         }
+       $expense = FUEL_ID;
 
        
 
@@ -69,17 +70,25 @@ class FuelResource extends Resource
                 ->required(),
                 Forms\Components\Select::make('vehicle_no')
                 ->options(
-                    vehicle::all()->pluck('vehicle_number', 'id')->toArray()
+                    AddVehicle::all()->pluck('vehicle_number', 'id')->toArray()
                 )
                 ->label('Vechicle Number')
                 ->searchable()
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function ($state, Closure $set){
-                    $mileage = vehicle::whereRaw("id =?", [$state])->value("vehicle_mileage");
+                    $vehicle_type = AddVehicle::whereRaw("id =?", [$state])->value("vehicle_type");
+                    $mileage = AddVehicle::whereRaw("id =?", [$state])->value("vehicle_mileage");
                     // dd($amount);
+                    $set('vehicle_type', $vehicle_type);
                     $set('mileage', $mileage);
+
                 }),
+                Forms\Components\Select::make('vehicle_type')
+                ->label('Vechicle Type')
+                ->searchable()
+                ->required()
+                ->reactive(),
                 Forms\Components\DatePicker::make('date')
                 ->required(),
                 Forms\Components\TextInput::make('mileage')

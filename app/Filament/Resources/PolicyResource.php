@@ -26,6 +26,13 @@ class PolicyResource extends Resource
 
     protected static ?string $navigationGroup = 'Expense';
 
+    protected static ?string $navigationLabel = 'Policy';
+
+
+    protected static ?int $navigationSort = 2;
+
+
+
 
     public static function form(Form $form): Form
     {
