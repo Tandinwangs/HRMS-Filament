@@ -33,7 +33,7 @@ class AdvanceTypeResource extends Resource
                     Forms\Components\Select::make('expense_type_id')
                     ->options(
                         ExpenseType::all()->pluck('name', 'id')->toArray()
-                    )->label('Expense Type'),
+                    )->label('Expense type'),
                 Forms\Components\DatePicker::make('start_date'),
                 Forms\Components\DatePicker::make('end_date')
                 ->after('start_date'),

@@ -56,7 +56,7 @@ class ExpenseApplicationResource extends Resource
                         ExpenseType::whereNotIn('name', ['DSA Settlement', 'Expense Fuel', 'Transfer Claim'])->pluck('name', 'id')->toArray()
 
                     )
-                    ->label('Expense Type')
+                    ->label('Expense type')
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, Closure $set){

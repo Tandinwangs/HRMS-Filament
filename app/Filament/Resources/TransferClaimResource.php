@@ -91,7 +91,8 @@ class TransferClaimResource extends Resource
                 Forms\Components\TextInput::make('employee_id')
                 ->default($emp_id)
                 ->disabled()
-                ->required(),
+                ->required()
+                ->label("Employee ID"),
                 Forms\Components\TextInput::make('designation')
                 ->default($designationName)
                 ->disabled()
@@ -109,7 +110,7 @@ class TransferClaimResource extends Resource
                     'Transfer Grant' => 'Transfer Grant',
                     'Carriage Charge' => 'Carriage Charge',
                 ]) 
-                ->label("Transfer Type")  
+                ->label("Transfer type")  
                 ->reactive()         
                 ->required(),
                

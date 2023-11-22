@@ -72,7 +72,7 @@ class FuelResource extends Resource
                 ->options(
                     AddVehicle::all()->pluck('vehicle_number', 'id')->toArray()
                 )
-                ->label('Vechicle Number')
+                ->label('Vechicle number')
                 ->searchable()
                 ->required()
                 ->reactive()
@@ -85,7 +85,7 @@ class FuelResource extends Resource
 
                 }),
                 Forms\Components\Select::make('vehicle_type')
-                ->label('Vechicle Type')
+                ->label('Vechicle type')
                 ->searchable()
                 ->required()
                 ->reactive(),
@@ -95,7 +95,8 @@ class FuelResource extends Resource
                 ->numeric()
                 ->disabled()
                 ->required()
-                ->reactive(),
+                ->reactive()
+                ->label("Mileage"),
                 Forms\Components\TextInput::make('initial_km')
                 ->numeric()
                 ->minValue(0)

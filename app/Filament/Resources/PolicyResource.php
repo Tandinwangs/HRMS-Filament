@@ -42,6 +42,7 @@ class PolicyResource extends Resource
                 ->options(
                     ExpenseType::all()->pluck('name', 'id')->toArray()
                 )
+                ->label("Expense type")
                 ->required(),
                 Forms\Components\TextInput::make('name')
                 ->required()

@@ -67,12 +67,12 @@ class ApplyAdvanceResource extends Resource
                 ->options(
                     AdvanceType::all()->pluck('name', 'id')->toArray()
                 )
-                ->label('Advance Type')
+                ->label('Advance type')
                 ->required()
                 ->reactive(),
                 Forms\Components\Select::make('item_type')
                 ->options(DeviceEMI::all()->pluck('type', 'id')->toArray())
-                ->label('Item Type')
+                ->label('Item type')
                 ->reactive()
                 ->searchable()
                 ->required()
@@ -267,6 +267,7 @@ class ApplyAdvanceResource extends Resource
                 ->minValue(0)
                 ->required()
                 ->reactive()
+                ->label("EMI amount")
                 ->visible(function ($get) use ($advanceTypes) {
                     $selectedAdvanceTypeId = $get('advance_type_id');
                     
@@ -298,6 +299,7 @@ class ApplyAdvanceResource extends Resource
                 ->disabled()
                 ->minValue(0)
                 ->reactive()
+                ->label("Monthly EMI amount")
                 // ->required()
                 ->visible(function ($get) use ($advanceTypes) {
                     $selectedAdvanceTypeId = $get('advance_type_id');
