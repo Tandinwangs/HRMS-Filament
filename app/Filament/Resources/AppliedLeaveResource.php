@@ -155,7 +155,8 @@ class AppliedLeaveResource extends Resource
                     
                             $set('holiday_dates', $uniqueDates);
 
-                    }),
+                    })
+                    ->label('Leave'),
                 Forms\Components\TextInput::make('leave_balance')
                 ->disabled(),
            
@@ -290,16 +291,22 @@ class AppliedLeaveResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $user = auth()->user();
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('leavetype.name'),
+                Tables\Columns\TextColumn::make('leavetype.name')
+                ->formatStateUsing(function ($state, $record) {
+                    return strtoupper($state);
+                }),
+                // ->description(fn (AppliedLeave $record): string => $record->remark),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date(),
                 Tables\Columns\TextColumn::make('end_date')
                     ->date(),
                 Tables\Columns\TextColumn::make('number_of_days'),
                 Tables\Columns\TextColumn::make('remark'),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')
+                ->color('primary') ,
             ])
             ->filters([
                 //
@@ -307,7 +314,9 @@ class AppliedLeaveResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Action::make('Download')
-                ->action(fn (AppliedLeave $record) => AppliedLeaveResource::downloadFile($record)),
+                ->action(fn (AppliedLeave $record) => AppliedLeaveResource::downloadFile($record))
+                ->icon('heroicon-s-download')
+                ->iconPosition('before'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -343,6 +352,15 @@ class AppliedLeaveResource extends Resource
         }
     
         return Storage::download($filePath);
+    }
+
+     
+    protected function getTableQuery(): Builder
+    {
+        return parent::getTableQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
     
 }

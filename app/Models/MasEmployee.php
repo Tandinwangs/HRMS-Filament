@@ -39,6 +39,8 @@ class MasEmployee extends FilamentUser
             'gender',
             'employment_type',
             'region_id',
+            'is_sectionHead',
+            'is_departmentHead',
             'password',
         ];
 
@@ -63,6 +65,7 @@ class MasEmployee extends FilamentUser
     public function designation():BelongsTo{
         return $this->belongsTo(MasDesignation::class,'designation_id');
     }
+
 
     public function assignUserRole($roleName)
     {
@@ -93,9 +96,6 @@ class MasEmployee extends FilamentUser
     {               
         parent::boot();
 
-        // static::created(function ($employee) {
-        //     LeaveBalance::create(['employee_id' => $employee->id]);
-        // });
 
         static::created(function ($employee) {
             $casualLeaveType = LeaveType::where('name', 'Casual Leave')->first();
@@ -110,6 +110,17 @@ class MasEmployee extends FilamentUser
                 : 0.0,
                 'earned_leave_balance' => 0.0  
             ]);
+
+        static::created(function ($masEmployee) {
+            // Get the selected role IDs from the form data
+            $selectedRoles = request('roles');
+
+            // Find the roles in the database
+            $roles = Role::find($selectedRoles);
+
+            // Assign the roles to the new MasEmployee
+            $masEmployee->roles()->attach($roles);
+        });
         });
     }
 

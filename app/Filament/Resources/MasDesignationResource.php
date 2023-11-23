@@ -31,6 +31,9 @@ class MasDesignationResource extends Resource
                     ->maxLength(200),
                 Forms\Components\Toggle::make('status')
                     ->required(),
+                Forms\Components\TextInput::make('created_by')
+                ->required()
+                ->maxLength(36),
             ]);
     }
 

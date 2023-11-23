@@ -14,7 +14,7 @@ class YearEndProcessRelationManager extends RelationManager
 {
     protected static string $relationship = 'YearEndProcess';
 
-    protected static ?string $recordTitleAttribute = 'policy_id';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {

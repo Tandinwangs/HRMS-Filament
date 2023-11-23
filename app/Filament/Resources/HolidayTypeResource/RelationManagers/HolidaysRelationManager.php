@@ -23,11 +23,11 @@ class HolidaysRelationManager extends RelationManager
     {
         return $form
             ->schema([    
-                Forms\Components\Select::make('holidaytype_id')
-                    ->options(
-                        HolidayType::all()->pluck('name', 'id')->toArray()
-                    )
-                    ->required(),
+                // Forms\Components\Select::make('holidaytype_id')
+                //     ->options(
+                //         HolidayType::all()->pluck('name', 'id')->toArray()
+                //     )
+                //     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -190,7 +190,11 @@ class HolidaysRelationManager extends RelationManager
             Tables\Columns\TextColumn::make('description'),
         ])
             ->filters([
-                //
+                SelectFilter::make('Date')
+                    ->options([
+                        1 => 'Active',
+                        0 => 'In-active',
+                    ])
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

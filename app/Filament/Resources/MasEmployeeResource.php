@@ -38,6 +38,7 @@ class MasEmployeeResource extends Resource
                     ->maxLength(100),
                 Forms\Components\TextInput::make('emp_id')
                 ->required()
+                ->unique(ignoreRecord: true)
                 ->maxLength(50)->label("Emp Id"),
                 Forms\Components\TextInput::make('email')
                 ->required()
@@ -98,10 +99,17 @@ class MasEmployeeResource extends Resource
                     })
                 ,
 
-                CheckboxList::make('roles')
+             
+
+                Forms\Components\CheckboxList::make('roles')
                 ->relationship('roles', 'name')
                 ->columns(2)
-                ->helperText('Only Choose One!')
+                ->helperText('Only Choose One!'),
+                Forms\Components\Toggle::make('is_sectionHead')
+                ->required(),
+
+                Forms\Components\Toggle::make('is_departmentHead')
+                ->required(),
                 ]);
     }
 

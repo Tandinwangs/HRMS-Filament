@@ -41,6 +41,8 @@ return new class extends Migration
             $table->string('employee_display', 350)->storedAs("concat(first_name,case when middle_name is not null then concat(' ',middle_name) else '' end, case when last_name is not null then concat(' ',last_name) else '' end, ' (E00',emp_id,')')");
             $table->string('gender')->nullable();
             $table->string('employment_type')->nullable();
+            $table->boolean('is_sectionHead')->default(0);
+            $table->boolean('is_departmentHead')->default(0);
             $table->string('password');
             $table->timestamps();
         });

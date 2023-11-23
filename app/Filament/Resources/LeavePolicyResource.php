@@ -22,6 +22,8 @@ class LeavePolicyResource extends Resource
 
     protected static ?string $navigationGroup = 'Leave';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -31,7 +33,8 @@ class LeavePolicyResource extends Resource
                     LeaveType::all()->pluck('name', 'id')->toArray()
                 )
                 ->required()
-                ->unique(ignoreRecord: true),
+                ->unique(ignoreRecord: true)
+                ->label('Leave Type'),
                 Forms\Components\TextInput::make('policy_name')
                     ->required()
                     ->maxLength(255),

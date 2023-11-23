@@ -31,12 +31,14 @@ class DzongkhagResource extends Resource
                 ->options(
                     Country::all()->pluck('name', 'id')->toArray()
                 )
-                ->required(),
+                ->required()
+                ->label('Country'),
                 Forms\Components\Select::make('region_id')
                 ->options(
                     Region::all()->pluck('name', 'id')->toArray()
                 )
-                ->required(),
+                ->required()
+                ->label('Region'),
                 Forms\Components\TextInput::make('name')
                 ->required()
                 ->maxLength(255),

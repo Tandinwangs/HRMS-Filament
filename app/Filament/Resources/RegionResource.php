@@ -31,7 +31,8 @@ class RegionResource extends Resource
                 ->options(
                     Country::all()->pluck('name', 'id')->toArray()
                 )
-                ->required(),
+                ->required()
+                ->label('Country'),
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),

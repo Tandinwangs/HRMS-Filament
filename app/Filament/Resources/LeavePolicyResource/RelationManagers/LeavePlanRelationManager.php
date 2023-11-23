@@ -14,7 +14,7 @@ class LeavePlanRelationManager extends RelationManager
 {
     protected static string $relationship = 'LeavePlan';
 
-    protected static ?string $recordTitleAttribute = 'policy_id';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
     {

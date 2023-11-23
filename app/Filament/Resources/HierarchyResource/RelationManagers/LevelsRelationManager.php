@@ -33,7 +33,7 @@ class LevelsRelationManager extends RelationManager
                 'MM' => "Management",
                 'HR' => "Human Resource",
                 'FH' => "Finance Head"
-            ])->required()->reactive(),
+            ])->required()->reactive()->label('Verifier'),
             
             Forms\Components\Select::make('emp_id')
             ->options(
@@ -69,7 +69,7 @@ class LevelsRelationManager extends RelationManager
             Tables\Columns\TextColumn::make('hierarchy.name'),
             Tables\Columns\TextColumn::make('emp_id'),
             Tables\Columns\TextColumn::make('level'),
-            Tables\Columns\TextColumn::make('value'),
+            Tables\Columns\TextColumn::make('value')->label('Verifier'),
             Tables\Columns\TextColumn::make('start_date')
                 ->date(),
             Tables\Columns\TextColumn::make('end_date')

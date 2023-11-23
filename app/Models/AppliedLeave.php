@@ -20,6 +20,7 @@ class AppliedLeave extends Model
         'end_date',
         'number_of_days',
         'file_path',
+        'status',
         'remark',
         'created_by',
         'edited_by'
@@ -36,12 +37,12 @@ class AppliedLeave extends Model
 
     public function user()
     {
-        return $this->belongsTo(MasEmployee::class);
+        return $this->belongsTo(MasEmployee::class, 'employee_id');
     }
 
     public function leaveApproval()
     {
-        return $this->hasOne(leaveApproval::class);
+        return $this->hasOne(leaveApproval::class, 'applied_leave_id');
     }
 
     protected static function boot()
@@ -67,4 +68,5 @@ class AppliedLeave extends Model
             ]);
         });
     }
+
 }

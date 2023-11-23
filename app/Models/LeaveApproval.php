@@ -29,10 +29,6 @@ class LeaveApproval extends Model
         return $this->belongsTo(AppliedLeave::class, 'applied_leave_id');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(MasEmployee::class);
-    }
 
     protected static function boot()
     {
