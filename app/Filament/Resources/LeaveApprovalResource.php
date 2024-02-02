@@ -35,6 +35,10 @@ class LeaveApprovalResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Leave';
+
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -228,23 +232,17 @@ class LeaveApprovalResource extends Resource
                 if ($levelRecord) {
                     // Access the 'value' field from the level record
                     $levelValue = $levelRecord->value;
-                    $userID = $levelRecord->employee_id;
+                    $userID = $levelRecord->emp_id;
                     $approval = MasEmployee::where('id', $userID)->first();
                     // Determine the recipient based on the levelValue
                     $recipient = $approval->email;
     
-                    // Check the levelValue and set the recipient accordingly
-                    if ($levelValue === "IS") {
-                        // Set the recipient to the section head's email address or user ID
-                         // Replace with the actual field name
-                    }
-      
                     $currentUser = $user;
     
                     Mail::to($recipient)->send(new LeaveApplicationMail($approval, $currentUser));
   
                 }
-            } else if($leaveApplication->level1==='approved' &&$leaveApplication->level2==='approved' && $approvalType->MaxLevel === 'Level3') {
+            } else if($leaveApplication->leaveApproval->level1==='approved' &&$leaveApplication->leaveApproval->level2==='approved' && $leaveApplication->leaveApproval->level3==="pending" && $approvalType->MaxLevel === 'Level3') {
 
                 $leaveApplication->leaveApproval->update([
                     'level3' => 'approved',
@@ -254,6 +252,9 @@ class LeaveApprovalResource extends Resource
                 $leaveApplication->update([
                     'status' => 'approved',
                 ]);
+
+                $instance = new self(); // Create an instance
+                $instance->fetchCasualLeaveBalance($leave_id,  $userID, $number_of_days);
 
                 $content = "The leave you have applied for has been approved.";
                 
@@ -265,6 +266,22 @@ class LeaveApprovalResource extends Resource
                 // Handle cases where the leave application cannot be approved (e.g., it's not at the expected level or already approved)
                 return redirect()->back()->with('error', 'Leave application cannot be approved.');
             }
+        }else if($approvalType->approval_type === "Single User"){
+             // Update the AppliedLeave model fields
+             $leaveApplication->update([
+                'status' => 'approved',
+            ]);
+            // $this->fetchCasualLeaveBalance($leave_id,  $userID, $number_of_days);
+            $instance = new self(); // Create an instance
+            $instance->fetchCasualLeaveBalance($leave_id,  $userID, $number_of_days);
+            $content = "The leave you have applied for has been approved.";
+        
+            Mail::to($Approvalrecipient)->send(new LeaveApprovedMail($user, $content));
+        
+            Notification::make() 
+            ->title('Leave Approved successfully')
+            ->success()
+            ->send();
         }
        
 

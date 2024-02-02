@@ -47,9 +47,9 @@ class ListLeaveApprovals extends ListRecords
             $subQuery->where('status', 'pending');
         })->where('level1', 'approved');
     } else {
-        // For other designations, you can customize the query as needed
-        // For example, you might want to show all records for the "Management" designation
-        $query->where('level3', 'pending')->where('status', 'pending');
+        $query->whereHas('appliedLeave', function($subQuery){
+            $subQuery->where('status', 'pending');
+        })->where('level3', 'pending');
     }
 
     return $query;

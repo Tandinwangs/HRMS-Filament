@@ -32,6 +32,10 @@ class AppliedLeaveResource extends Resource
 
     public static ?string $label = 'Apply Leave';
 
+    protected static ?string $navigationGroup = 'Leave';
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         $currentUser = Auth()->user();

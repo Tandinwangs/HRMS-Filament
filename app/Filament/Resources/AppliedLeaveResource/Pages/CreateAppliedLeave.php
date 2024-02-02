@@ -49,6 +49,13 @@ class CreateAppliedLeave extends CreateRecord
                 Mail::to($recipient)->send(new LeaveApplicationMail($approval, $currentUser));
             }
         
+    }else if($approvalType->approval_type === "Single User") {
+        $employee_id = $approvalType->employee_id;
+        $approval = MasEmployee::where('id', $employee_id)->first();
+    
+        $recipient = $approval->email;
+
+        Mail::to($recipient)->send(new LeaveApplicationMail($approval, $currentUser));
     }
     return $data;
  
